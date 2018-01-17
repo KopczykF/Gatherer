@@ -1,0 +1,13 @@
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Api.deps.json
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Api.runtimeconfig.json
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Api.runtimeconfig.dev.json
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Api.dll
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Api.pdb
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Infrastructure.dll
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Infrastructure.pdb
+Z:\Projects\Gatherer\Gatherer.Api\obj\Debug\netcoreapp1.1\Gatherer.Api.csproj.CoreCompileInputs.cache
+Z:\Projects\Gatherer\Gatherer.Api\obj\Debug\netcoreapp1.1\Gatherer.Api.AssemblyInfo.cs
+Z:\Projects\Gatherer\Gatherer.Api\obj\Debug\netcoreapp1.1\Gatherer.Api.dll
+Z:\Projects\Gatherer\Gatherer.Api\obj\Debug\netcoreapp1.1\Gatherer.Api.pdb
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Core.dll
+Z:\Projects\Gatherer\Gatherer.Api\bin\Debug\netcoreapp1.1\Gatherer.Core.pdb

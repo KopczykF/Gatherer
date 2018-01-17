@@ -1,0 +1,9 @@
+Z:\Projects\Gatherer\Gatherer.Infrastructure\bin\Debug\netstandard1.4\Gatherer.Infrastructure.deps.json
+Z:\Projects\Gatherer\Gatherer.Infrastructure\bin\Debug\netstandard1.4\Gatherer.Infrastructure.dll
+Z:\Projects\Gatherer\Gatherer.Infrastructure\bin\Debug\netstandard1.4\Gatherer.Infrastructure.pdb
+Z:\Projects\Gatherer\Gatherer.Infrastructure\bin\Debug\netstandard1.4\Gatherer.Core.dll
+Z:\Projects\Gatherer\Gatherer.Infrastructure\bin\Debug\netstandard1.4\Gatherer.Core.pdb
+Z:\Projects\Gatherer\Gatherer.Infrastructure\obj\Debug\netstandard1.4\Gatherer.Infrastructure.csproj.CoreCompileInputs.cache
+Z:\Projects\Gatherer\Gatherer.Infrastructure\obj\Debug\netstandard1.4\Gatherer.Infrastructure.AssemblyInfo.cs
+Z:\Projects\Gatherer\Gatherer.Infrastructure\obj\Debug\netstandard1.4\Gatherer.Infrastructure.dll
+Z:\Projects\Gatherer\Gatherer.Infrastructure\obj\Debug\netstandard1.4\Gatherer.Infrastructure.pdb

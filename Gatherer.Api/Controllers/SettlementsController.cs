@@ -1,0 +1,57 @@
+using System;
+using System.Threading.Tasks;
+using Gatherer.Infrastructure.Commands.Settlement;
+using Gatherer.Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Gatherer.Api.Controllers
+{
+    [Route("[controller]")]
+    public class SettlementsController : Controller
+    {
+        private readonly ISettlementService _settlementService;
+
+        public SettlementsController(ISettlementService settlementService)
+        {
+            _settlementService = settlementService;
+        }
+
+        [HttpGet("{settlementId}")]
+        public async Task<IActionResult> Get(Guid settlementid)
+        {
+            var settlement = await _settlementService.GetAsync(settlementid);
+            if(settlement == null)
+            {
+                return NotFound();
+            }
+
+            return Json(settlement);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]CreateSettlement command)
+        {
+            command.SettlementId = Guid.NewGuid();
+            await _settlementService.CreateAsync(command.SettlementId, command.UserId, 
+                command.Name, command.Description);
+
+            return Created($"/settlements/{command.SettlementId}", null);
+        }
+
+        [HttpPut("{settlementId}")]
+        public async Task<IActionResult> Put(Guid settlementId, [FromBody]UpdateSettlement command)
+        {
+            await _settlementService.UpdateAsync(settlementId, command.Name, command.Description);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{settlementId}")]
+        public async Task<IActionResult> Put(Guid settlementId)
+        {
+            await _settlementService.DeleteAsync(settlementId);
+
+            return NoContent();
+        }
+    }
+}
