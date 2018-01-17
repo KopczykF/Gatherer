@@ -1,7 +1,0 @@
-Z:\Projects\Gatherer\Gatherer.Core\bin\Debug\netstandard1.4\Gatherer.Core.deps.json
-Z:\Projects\Gatherer\Gatherer.Core\bin\Debug\netstandard1.4\Gatherer.Core.dll
-Z:\Projects\Gatherer\Gatherer.Core\bin\Debug\netstandard1.4\Gatherer.Core.pdb
-Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard1.4\Gatherer.Core.csproj.CoreCompileInputs.cache
-Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard1.4\Gatherer.Core.AssemblyInfo.cs
-Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard1.4\Gatherer.Core.dll
-Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard1.4\Gatherer.Core.pdb

@@ -1,0 +1,16 @@
+Z:\Projects\Test\Gatherer.Core\bin\Debug\netstandard2.0\Gatherer.Core.deps.json
+Z:\Projects\Test\Gatherer.Core\bin\Debug\netstandard2.0\Gatherer.Core.dll
+Z:\Projects\Test\Gatherer.Core\bin\Debug\netstandard2.0\Gatherer.Core.pdb
+Z:\Projects\Test\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.csproj.CoreCompileInputs.cache
+Z:\Projects\Test\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.AssemblyInfoInputs.cache
+Z:\Projects\Test\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.AssemblyInfo.cs
+Z:\Projects\Test\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.dll
+Z:\Projects\Test\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.pdb
+Z:\Projects\Gatherer\Gatherer.Core\bin\Debug\netstandard2.0\Gatherer.Core.deps.json
+Z:\Projects\Gatherer\Gatherer.Core\bin\Debug\netstandard2.0\Gatherer.Core.dll
+Z:\Projects\Gatherer\Gatherer.Core\bin\Debug\netstandard2.0\Gatherer.Core.pdb
+Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.csproj.CoreCompileInputs.cache
+Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.AssemblyInfoInputs.cache
+Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.AssemblyInfo.cs
+Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.dll
+Z:\Projects\Gatherer\Gatherer.Core\obj\Debug\netstandard2.0\Gatherer.Core.pdb
