@@ -4784,7 +4784,8 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "AutoMapper": "6.2.2",
-          "Gatherer.Core": "1.0.0"
+          "Gatherer.Core": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.0.1"
         },
         "compile": {
           "bin/placeholder/Gatherer.Infrastructure.dll": {}
@@ -12606,6 +12607,7 @@
       "AutoMapper >= 6.2.2",
       "Gatherer.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.5",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.0.1",
       "Microsoft.NETCore.App >= 2.0.0"
     ]
   },
@@ -12661,6 +12663,10 @@
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "[2.0.5, )"
+          },
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[2.0.1, )"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
