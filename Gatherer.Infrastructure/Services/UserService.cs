@@ -2,16 +2,19 @@ using System;
 using System.Threading.Tasks;
 using Gatherer.Core.Domain;
 using Gatherer.Core.Repositories;
+using Gatherer.Infrastructure.DTO;
 
 namespace Gatherer.Infrastructure.Services
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IJwtHandler _jwtHandler;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IJwtHandler jwtHandler)
         {
             _userRepository = userRepository;
+            _jwtHandler = jwtHandler;
         }
 
 
@@ -26,7 +29,7 @@ namespace Gatherer.Infrastructure.Services
             await _userRepository.AddAsync(user);
         }
 
-        public async Task LoginAsync(string email, string password)
+        public async Task<TokenDto> LoginAsync(string email, string password)
         {
             var user = await _userRepository.GetAsync(email);
             if(user == null)
@@ -37,6 +40,15 @@ namespace Gatherer.Infrastructure.Services
             if(user.Password != password)
             {
                 throw new Exception($"Invalid credentials.");
+            }
+
+            var jwt = _jwtHandler.CreateToken(user.Id, user.Role);
+
+            return new TokenDto
+            {
+                Token = jwt.Token,
+                Expires = jwt.Expires,
+                Role = user.Role
             }
         }
     }

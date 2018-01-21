@@ -36,9 +36,7 @@ namespace Gatherer.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Post(Login login)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IActionResult> Post(Login command)
+            => Json(await _userService.LoginAsync(command.Email, command.Password));
     }
 }

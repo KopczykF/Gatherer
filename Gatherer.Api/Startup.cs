@@ -44,6 +44,8 @@ namespace Gatherer.Api
             services.AddScoped<ISettlementService, SettlementService>();
             services.AddScoped<IUserService, UserService>();
             services.AddSingleton(AutoMapperConfig.Initialize());
+            services.AddSingleton<IJwtHandler, JwtHandler>();
+            services.Configure<JwtSettings>(Configuration.GetSection("jwt"));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -55,7 +57,7 @@ namespace Gatherer.Api
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
+                    //ValidAudience = Configuration["Jwt:Issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
