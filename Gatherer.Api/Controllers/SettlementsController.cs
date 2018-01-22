@@ -2,12 +2,15 @@ using System;
 using System.Threading.Tasks;
 using Gatherer.Infrastructure.Commands.Settlement;
 using Gatherer.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gatherer.Api.Controllers
 {
     [Route("[controller]")]
-    public class SettlementsController : Controller
+    [Authorize(Policy = "HasAdminRole")]
+    [Authorize(Policy = "user")]
+    public class SettlementsController : ApiControllerBase
     {
         private readonly ISettlementService _settlementService;
 
@@ -32,7 +35,7 @@ namespace Gatherer.Api.Controllers
         public async Task<IActionResult> Post([FromBody]CreateSettlement command)
         {
             command.SettlementId = Guid.NewGuid();
-            await _settlementService.CreateAsync(command.SettlementId, command.UserId, 
+            await _settlementService.CreateAsync(command.SettlementId, UserId, 
                 command.Name, command.Description);
 
             return Created($"/settlements/{command.SettlementId}", null);

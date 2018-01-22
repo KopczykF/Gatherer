@@ -2,11 +2,12 @@ using System;
 using System.Threading.Tasks;
 using Gatherer.Infrastructure.Commands.Users;
 using Gatherer.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gatherer.Api.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ApiControllerBase
     {
         private IUserService _userService;
 
@@ -14,11 +15,12 @@ namespace Gatherer.Api.Controllers
         {
             _userService = userService;
         }
+
         [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            throw new NotImplementedException();
-        }
+        [Authorize]
+        public async Task<IActionResult> Get() 
+            => Json(await _userService.GetAccountAsync(UserId));
+        
 
         [HttpGet("settlements")]
         public async Task<IActionResult> GetSettlements()
@@ -27,16 +29,16 @@ namespace Gatherer.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Post(Register command)
+        public async Task<IActionResult> Post([FromBody]Register command)
         {
-            await _userService.RegisterAsync(Guid.NewGuid(), 
+            await _userService.RegisterAsync(Guid.NewGuid(),
                 command.Email, command.UserName, command.Password, command.Role);
 
             return Created("/account", null);
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Post(Login command)
+        public async Task<IActionResult> Post([FromBody]Login command) 
             => Json(await _userService.LoginAsync(command.Email, command.Password));
     }
 }

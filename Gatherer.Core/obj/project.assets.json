@@ -183,11 +183,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj",
+      "projectUniqueName": "Z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj",
       "projectName": "Gatherer.Core",
-      "projectPath": "z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj",
+      "projectPath": "Z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj",
       "packagesPath": "C:\\Users\\kopcz\\.nuget\\packages\\",
-      "outputPath": "z:\\Projects\\Gatherer\\Gatherer.Core\\obj\\",
+      "outputPath": "Z:\\Projects\\Gatherer\\Gatherer.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

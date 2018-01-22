@@ -5890,11 +5890,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "z:\\Projects\\Gatherer\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj",
+      "projectUniqueName": "Z:\\Projects\\Gatherer\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj",
       "projectName": "Gatherer.Infrastructure",
-      "projectPath": "z:\\Projects\\Gatherer\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj",
+      "projectPath": "Z:\\Projects\\Gatherer\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\kopcz\\.nuget\\packages\\",
-      "outputPath": "z:\\Projects\\Gatherer\\Gatherer.Infrastructure\\obj\\",
+      "outputPath": "Z:\\Projects\\Gatherer\\Gatherer.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5913,8 +5913,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj": {
-              "projectPath": "z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj"
+            "Z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj": {
+              "projectPath": "Z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj"
             }
           }
         }

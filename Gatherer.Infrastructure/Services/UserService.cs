@@ -1,8 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using Gatherer.Core.Domain;
 using Gatherer.Core.Repositories;
 using Gatherer.Infrastructure.DTO;
+using Gatherer.Infrastructure.Extensions;
 
 namespace Gatherer.Infrastructure.Services
 {
@@ -10,13 +12,20 @@ namespace Gatherer.Infrastructure.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IJwtHandler _jwtHandler;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, IJwtHandler jwtHandler)
+        public UserService(IUserRepository userRepository, IJwtHandler jwtHandler, IMapper mapper)
         {
             _userRepository = userRepository;
             _jwtHandler = jwtHandler;
+            _mapper = mapper;
         }
 
+        public async Task<AccountDto> GetAccountAsync(Guid userId)
+        {
+            var user = await _userRepository.GetOrFailAsync(userId);
+            return _mapper.Map<AccountDto>(user);
+        }
 
         public async Task RegisterAsync(Guid userId, string email, string name, string password, string role = "user")
         {
@@ -49,7 +58,7 @@ namespace Gatherer.Infrastructure.Services
                 Token = jwt.Token,
                 Expires = jwt.Expires,
                 Role = user.Role
-            }
+            };
         }
     }
 }

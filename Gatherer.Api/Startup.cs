@@ -39,6 +39,7 @@ namespace Gatherer.Api
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
+            services.AddAuthorization();
             services.AddScoped<ISettlementRepository, SettlementRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISettlementService, SettlementService>();
@@ -53,11 +54,11 @@ namespace Gatherer.Api
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                     ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = Configuration["Jwt:Issuer"],
-                    //ValidAudience = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
