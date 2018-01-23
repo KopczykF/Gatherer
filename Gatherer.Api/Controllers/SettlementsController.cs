@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gatherer.Api.Controllers
 {
     [Route("[controller]")]
-    [Authorize(Policy = "HasAdminRole")]
     [Authorize(Policy = "user")]
     public class SettlementsController : ApiControllerBase
     {

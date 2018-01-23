@@ -5,14 +5,14 @@ namespace Gatherer.Core.Domain
 {
     public class Settlement : Entity
     {
-        private readonly Dictionary<Guid, List<Expense>> _UsersExpenseList = new Dictionary<Guid, List<Expense>>();
+        private Dictionary<Guid, List<Expense>> _usersExpenseList = new Dictionary<Guid, List<Expense>>();
         public string Name { get; protected set; }
         public string Description { get; protected set; }
-        public DateTime CreateAt { get; protected set; }
+        public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
-        public IEnumerable<KeyValuePair<Guid, List<Expense>>> UsersExpenseList => _UsersExpenseList;
+        public IEnumerable<KeyValuePair<Guid, List<Expense>>> UsersExpenseList => _usersExpenseList;
 
-        protected Settlement() 
+        protected Settlement()
         { }
 
         public Settlement(Guid id, Guid userId, string name, string description = null)
@@ -20,9 +20,9 @@ namespace Gatherer.Core.Domain
             Id = id;
             SetName(name);
             SetDescription(Description);
-            CreateAt = DateTime.UtcNow;
+            CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            _UsersExpenseList.Add(userId, new List<Expense>());
+            _usersExpenseList.Add(userId, new List<Expense>());
         }
 
         public void SetName(string name)
@@ -39,6 +39,17 @@ namespace Gatherer.Core.Domain
         public void SetDescription(string description)
         {
             Description = description;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void AddExpense(Expense expense)
+        {
+            if (_usersExpenseList.ContainsKey(expense.UserId))
+            {
+                _usersExpenseList[expense.UserId].Add(expense);
+                UpdatedAt = DateTime.UtcNow;
+            }
+            _usersExpenseList.Add(expense.UserId, new List<Expense>{expense});
             UpdatedAt = DateTime.UtcNow;
         }
     }

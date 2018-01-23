@@ -26,8 +26,7 @@ namespace Gatherer.Infrastructure.Services
             return _mapper.Map<SettlementDetailsDto>(settlement);
         }
 
-        public async Task CreateAsync(Guid id, Guid userId, string name, 
-            string description = null)
+        public async Task CreateAsync(Guid id, Guid userId, string name, string description = null)
         {
             var settlement = await _settlementRepository.GetAsync(id);
             if(settlement != null)
@@ -39,7 +38,13 @@ namespace Gatherer.Infrastructure.Services
         }
         public async Task AddExpenseAsync(Guid id, Guid userId, string name, decimal cost)
         {
-            throw new NotImplementedException();
+            var settlement = await _settlementRepository.GetAsync(id);
+            if(settlement == null)
+            {
+                throw new Exception($"Settlement with id: '{id}' do not exist.");
+            }
+            var expense = new Expense(Guid.NewGuid(), userId, name, cost);
+            await _settlementRepository.AddExpenseAsync(expense, id);
         }
 
         public async Task UpdateAsync(Guid id, string name, string description)
@@ -49,7 +54,6 @@ namespace Gatherer.Infrastructure.Services
             settlement.SetDescription(description);
             await _settlementRepository.UpdateAsync(settlement);
         }
-
 
         public async Task DeleteAsync(Guid id)
         {
