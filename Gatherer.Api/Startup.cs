@@ -44,9 +44,11 @@ namespace Gatherer.Api
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISettlementService, SettlementService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDataInitializer, DataInitializer>();
             services.AddSingleton(AutoMapperConfig.Initialize());
             services.AddSingleton<IJwtHandler, JwtHandler>();
             services.Configure<JwtSettings>(Configuration.GetSection("jwt"));
+            services.Configure<AppSettings>(Configuration.GetSection("app"));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -70,8 +72,20 @@ namespace Gatherer.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            SeedData(app);
+
             app.UseAuthentication();
             app.UseMvc();
+        }
+
+        public void SeedData(IApplicationBuilder app)
+        {
+            var settings = app.ApplicationServices.GetService<AppSettings>();
+            if(settings.SeedData)
+            {
+                var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
+                dataInitializer.SeedAsync();
+            }
         }
     }
 }
