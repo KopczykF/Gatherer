@@ -42,15 +42,18 @@ namespace Gatherer.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public void AddExpense(Expense expense)
-        {
-            if (_usersExpenseList.ContainsKey(expense.UserId))
-            {
-                _usersExpenseList[expense.UserId].Add(expense);
-                UpdatedAt = DateTime.UtcNow;
-            }
-            _usersExpenseList.Add(expense.UserId, new List<Expense>{expense});
-            UpdatedAt = DateTime.UtcNow;
-        }
+        // public void AddExpense(Expense expense)
+        // {
+        //     if (_usersExpenseList.ContainsKey(expense.UserId))
+        //     {
+        //         _usersExpenseList[expense.UserId].Add(expense);
+        //         UpdatedAt = DateTime.UtcNow;
+        //     }
+        //     _usersExpenseList.Add(expense.UserId, new List<Expense>{expense});
+        //     UpdatedAt = DateTime.UtcNow;
+        // }
+
+        public IEnumerable<Expense> GetUserExpenses(Guid userId)
+            => _usersExpenseList[userId];
     }
 }

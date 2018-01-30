@@ -10955,7 +10955,7 @@
       ]
     },
     "System.Runtime.Serialization.Formatters/4.3.0": {
-      "sha512": "KT591AkTNFOTbhZlaeMVvfax3RqhH1EJlcwF50Wm7sfnBLuHiOeZRRKrr1ns3NESkM20KPZ5Ol/ueMq5vg4QoQ==",
+      "sha512": "TRIJsiD/A6GEarhOYuOIEkq5ZFBhh9bB5f6bOSAlHM6XZc3v0xHPZyMc/LvSEj9zY1aCsPzGZqUccN/DXHhCtQ==",
       "type": "package",
       "path": "system.runtime.serialization.formatters/4.3.0",
       "files": [

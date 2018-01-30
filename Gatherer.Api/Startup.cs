@@ -39,7 +39,7 @@ namespace Gatherer.Api
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
-            services.AddAuthorization();
+            services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
             services.AddScoped<ISettlementRepository, SettlementRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISettlementService, SettlementService>();

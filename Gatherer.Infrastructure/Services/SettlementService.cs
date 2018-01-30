@@ -36,6 +36,7 @@ namespace Gatherer.Infrastructure.Services
             settlement = new Settlement(id, userId, name, description);
             await _settlementRepository.AddAsync(settlement);
         }
+        
         public async Task AddExpenseAsync(Guid id, Guid userId, string name, decimal cost)
         {
             var settlement = await _settlementRepository.GetAsync(id);

@@ -8,6 +8,10 @@ namespace Gatherer.Core.Domain
     {
         private static readonly Regex NameRegex = new Regex("^(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9._.-]+(?<![_.-])$");
         private readonly ISet<Guid> _userSettlements = new HashSet<Guid>();
+        private static List<string> _roles = new List<string>
+        {
+            "user", "admin"
+        };
         public string Role { get; protected set; }
         public string UserName { get; protected set; }
         public string Email { get; protected set; }
@@ -69,6 +73,10 @@ namespace Gatherer.Core.Domain
             if (string.IsNullOrWhiteSpace(role))
             {
                 throw new Exception("Role can not be empty.");
+            }
+            if (!_roles.Contains(role))
+            {
+                throw new Exception($"User can not have a role: '{role}.");
             }
             if (Role == role)
             {

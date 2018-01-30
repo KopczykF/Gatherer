@@ -24,7 +24,7 @@ namespace Gatherer.Infrastructure.Repositories
 
         public async Task AddExpenseAsync(Expense expense, Guid settlementId)
         {
-            _settlements.SingleOrDefault(x => x.Id == settlementId).AddExpense(expense);
+            _settlements.Single(x => x.Id == settlementId).GetUserExpenses(expense.UserId);
             await Task.CompletedTask;
         }
 

@@ -1,6 +1,6 @@
 namespace Gatherer.Infrastructure.DTO
 {
-    public class UserDTO
+    public class UserDto
     {
         
     }
