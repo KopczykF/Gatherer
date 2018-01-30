@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gatherer.Api.Framework;
 using Gatherer.Core.Repositories;
 using Gatherer.Infrastructure.Mappers;
 using Gatherer.Infrastructure.Repositories;
@@ -73,6 +74,7 @@ namespace Gatherer.Api
             loggerFactory.AddDebug();
 
             SeedData(app);
+            app.UseErrorHandler();
 
             app.UseAuthentication();
             app.UseMvc();
