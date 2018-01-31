@@ -1,0 +1,17 @@
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Tests.deps.json
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Tests.runtimeconfig.json
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Tests.runtimeconfig.dev.json
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Tests.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Tests.pdb
+Z:\Projects\Gatherer\tests\Gatherer.Tests\obj\Debug\netcoreapp2.0\Gatherer.Tests.csproj.CoreCompileInputs.cache
+Z:\Projects\Gatherer\tests\Gatherer.Tests\obj\Debug\netcoreapp2.0\Gatherer.Tests.AssemblyInfoInputs.cache
+Z:\Projects\Gatherer\tests\Gatherer.Tests\obj\Debug\netcoreapp2.0\Gatherer.Tests.AssemblyInfo.cs
+Z:\Projects\Gatherer\tests\Gatherer.Tests\obj\Debug\netcoreapp2.0\Gatherer.Tests.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests\obj\Debug\netcoreapp2.0\Gatherer.Tests.pdb
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Core.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Infrastructure.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Core.pdb
+Z:\Projects\Gatherer\tests\Gatherer.Tests\bin\Debug\netcoreapp2.0\Gatherer.Infrastructure.pdb

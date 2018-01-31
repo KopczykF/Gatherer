@@ -1,0 +1,13 @@
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\bin\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.deps.json
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\bin\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.runtimeconfig.json
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\bin\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.runtimeconfig.dev.json
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\bin\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\bin\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.pdb
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\obj\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.csproj.CoreCompileInputs.cache
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\obj\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.AssemblyInfoInputs.cache
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\obj\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.AssemblyInfo.cs
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\obj\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.dll
+Z:\Projects\Gatherer\tests\Gatherer.Tests.EndToEnd\obj\Debug\netcoreapp2.0\Gatherer.Tests.EndToEnd.pdb
