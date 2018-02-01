@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="Moq" Version="4.8.1" />
@@ -16,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Gatherer.Core\Gatherer.Core.csproj" />
-    <ProjectReference Include="..\..\Gatherer.Infrastructure\Gatherer.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Gatherer.Core\Gatherer.Core.csproj" />
+    <ProjectReference Include="..\..\src\Gatherer.Infrastructure\Gatherer.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

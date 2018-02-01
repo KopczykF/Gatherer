@@ -10,10 +10,9 @@ namespace Gatherer.Core.Domain
         public string Description { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
-        public IEnumerable<KeyValuePair<Guid, List<Expense>>> UsersExpenseList => _usersExpenseList;
+        public IEnumerable<KeyValuePair<Guid, List<Expense>> > UsersExpenseList => _usersExpenseList;
 
-        protected Settlement()
-        { }
+        protected Settlement() { }
 
         public Settlement(Guid id, Guid userId, string name, string description = null)
         {
@@ -42,18 +41,43 @@ namespace Gatherer.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        // public void AddExpense(Expense expense)
-        // {
-        //     if (_usersExpenseList.ContainsKey(expense.UserId))
-        //     {
-        //         _usersExpenseList[expense.UserId].Add(expense);
-        //         UpdatedAt = DateTime.UtcNow;
-        //     }
-        //     _usersExpenseList.Add(expense.UserId, new List<Expense>{expense});
-        //     UpdatedAt = DateTime.UtcNow;
-        // }
+        public void AddExpense(Expense expense)
+        {
+            if (!_usersExpenseList.ContainsKey(expense.UserId))
+            {
+                _usersExpenseList.Add(expense.UserId, new List<Expense>());
+            }
+            _usersExpenseList[expense.UserId].Add(expense);
+            UpdatedAt = DateTime.UtcNow;
+        }
 
-        public IEnumerable<Expense> GetUserExpenses(Guid userId)
-            => _usersExpenseList[userId];
+        public void RemoveExpense(Expense expense)
+        {
+            if (!_usersExpenseList.ContainsKey(expense.UserId))
+            {
+                throw new Exception($"User with Id: {expense.Id} have not expenses in this settlement");
+            }
+            if (!_usersExpenseList[expense.UserId].Contains(expense))
+            {
+                throw new Exception($"Expense with id: '{expense.Id}' do not exist.");
+            }
+            _usersExpenseList[expense.UserId].Remove(expense);
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public IEnumerable<Expense> GetUserExpenses(Guid userId) => _usersExpenseList[userId];
+
+        public Expense GetUserExpense(Guid userId, Guid expenseId)
+        {
+            if (!_usersExpenseList.ContainsKey(userId))
+            {
+                throw new Exception($"User with Id: {userId} have not expenses in this settlement");
+            }
+            if (!_usersExpenseList[expenseId].Exists((x => x.Id == expenseId)))
+            {
+                throw new Exception($"Expense with id: '{expenseId}' do not exist.");
+            }
+            return _usersExpenseList[userId].Find((x => x.Id == expenseId));
+        }
     }
 }

@@ -55,6 +55,8 @@ namespace Gatherer.Tests.Services
             userRepositoryMock.Verify(x => x.GetAsync(user.Id), Times.Once());
             accountDto.Should().NotBeNull();
             accountDto.Email.ShouldAllBeEquivalentTo(user.Email);
+            accountDto.Name.ShouldAllBeEquivalentTo(user.Name);
+            accountDto.Role.ShouldAllBeEquivalentTo(user.Role);
         }
     }
 }

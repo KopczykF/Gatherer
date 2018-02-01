@@ -11,6 +11,7 @@ namespace Gatherer.Core.Repositories
         // Task<IEnumerable<Settlement>> BrowseAsync(Guid id);
         Task AddAsync(Settlement settlement);
         Task AddExpenseAsync(Expense expense, Guid settlementId);
+        Task RemoveExpenseAsync(Expense expense, Guid settlementId);
         Task UpdateAsync(Settlement settlement);
         Task DeleteAsync(Settlement settlement);
     }

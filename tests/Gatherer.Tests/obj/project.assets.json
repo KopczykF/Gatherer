@@ -8382,17 +8382,18 @@
     },
     "Gatherer.Core/1.0.0": {
       "type": "project",
-      "path": "../../Gatherer.Core/Gatherer.Core.csproj",
-      "msbuildProject": "../../Gatherer.Core/Gatherer.Core.csproj"
+      "path": "../../src/Gatherer.Core/Gatherer.Core.csproj",
+      "msbuildProject": "../../src/Gatherer.Core/Gatherer.Core.csproj"
     },
     "Gatherer.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../../Gatherer.Infrastructure/Gatherer.Infrastructure.csproj",
-      "msbuildProject": "../../Gatherer.Infrastructure/Gatherer.Infrastructure.csproj"
+      "path": "../../src/Gatherer.Infrastructure/Gatherer.Infrastructure.csproj",
+      "msbuildProject": "../../src/Gatherer.Infrastructure/Gatherer.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "AutoMapper >= 6.2.2",
       "FluentAssertions >= 4.19.4",
       "Gatherer.Core >= 1.0.0",
       "Gatherer.Infrastructure >= 1.0.0",
@@ -8433,11 +8434,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "Z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj": {
-              "projectPath": "Z:\\Projects\\Gatherer\\Gatherer.Core\\Gatherer.Core.csproj"
+            "Z:\\Projects\\Gatherer\\src\\Gatherer.Core\\Gatherer.Core.csproj": {
+              "projectPath": "Z:\\Projects\\Gatherer\\src\\Gatherer.Core\\Gatherer.Core.csproj"
             },
-            "Z:\\Projects\\Gatherer\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj": {
-              "projectPath": "Z:\\Projects\\Gatherer\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj"
+            "Z:\\Projects\\Gatherer\\src\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj": {
+              "projectPath": "Z:\\Projects\\Gatherer\\src\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj"
             }
           }
         }
@@ -8451,6 +8452,10 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[6.2.2, )"
+          },
           "FluentAssertions": {
             "target": "Package",
             "version": "[4.19.4, )"

@@ -16,11 +16,28 @@ namespace Gatherer.Infrastructure.Services
         public async Task SeedAsync()
         {
             var tasks = new List<Task>();
-            tasks.Add(_userService.RegisterAsync(Guid.NewGuid(), "user1@email.com", 
+            var user1Guid = Guid.NewGuid();
+            var user2Guid = Guid.NewGuid();
+            var settlement1Guid = Guid.NewGuid();
+            var settlement2Guid = Guid.NewGuid();
+            tasks.Add(_userService.RegisterAsync(user1Guid, "user1@email.com", 
                 "user1", "secret"));
-            tasks.Add(_userService.RegisterAsync(Guid.NewGuid(), "admin@email.com", 
+            tasks.Add(_userService.RegisterAsync(user2Guid, "admin@email.com", 
                 "user2", "secret", "admin"));
-            //TODO add some settlements
+            
+            tasks.Add(_settlementService.CreateAsync(settlement1Guid, user1Guid, 
+                "Settlement1"));
+            tasks.Add(_settlementService.CreateAsync(settlement2Guid, user2Guid, 
+                "Settlement1"));
+
+            tasks.Add(_settlementService.AddExpenseAsync(settlement1Guid, user1Guid, 
+                "Expense1Name", 10m));
+            tasks.Add(_settlementService.AddExpenseAsync(settlement1Guid, user1Guid, 
+                "Expense2Name", 20m));
+            tasks.Add(_settlementService.AddExpenseAsync(settlement1Guid, user2Guid, 
+                "Expense3Name", 30m));
+            tasks.Add(_settlementService.AddExpenseAsync(settlement1Guid, user2Guid, 
+                "Expense4Name", 40m));
 
             await Task.WhenAll(tasks);
             
