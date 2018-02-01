@@ -11,10 +11,8 @@ namespace Gatherer.Infrastructure.Repositories
     {
         private static readonly List<Settlement> _settlements = new List<Settlement>();
 
-        public async Task<Settlement> GetAsync(Guid id) => await Task.FromResult(_settlements.SingleOrDefault(x => x.Id == id));
-
-        // public async Task<IEnumerable<Settlement>> BrowseAsync(Guid id)
-        //     => await Task.FromResult(_settlements.Where(x => x.Id == id));
+        public async Task<Settlement> GetAsync(Guid id) 
+            => await Task.FromResult(_settlements.SingleOrDefault(x => x.Id == id));
 
         public async Task AddAsync(Settlement settlement)
         {
@@ -28,20 +26,25 @@ namespace Gatherer.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task RemoveExpenseAsync(Expense expense, Guid settlementId)
+        public async Task UpdateSettlementAsync(Settlement settlement)
         {
-            _settlements.Single(x => x.Id == settlementId).RemoveExpense(expense);
             await Task.CompletedTask;
         }
 
-        public async Task DeleteAsync(Settlement settlement)
+        public async Task UpdateExpenseAsync(Expense expense)
+        {
+            await Task.CompletedTask;
+        }
+
+        public async Task DeleteSettlementAsync(Settlement settlement)
         {
             _settlements.Remove(settlement);
             await Task.CompletedTask;
         }
 
-        public async Task UpdateAsync(Settlement settlement)
+        public async Task DeleteExpenseAsync(Guid settlementId, Expense expense)
         {
+            _settlements.Single(x => x.Id == settlementId).RemoveExpense(expense);
             await Task.CompletedTask;
         }
     }

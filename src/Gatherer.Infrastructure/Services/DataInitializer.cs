@@ -8,10 +8,13 @@ namespace Gatherer.Infrastructure.Services
     {
         private readonly IUserService _userService;
         private readonly ISettlementService _settlementService;
-        public DataInitializer(IUserService userService, ISettlementService settlementService)
+        private readonly IExpenseService _expenseService;
+        public DataInitializer(IUserService userService, ISettlementService settlementService, 
+            IExpenseService expenseService)
         {
             _userService = userService;
             _settlementService = settlementService;
+            _expenseService = expenseService;
         }
         public async Task SeedAsync()
         {
@@ -30,13 +33,13 @@ namespace Gatherer.Infrastructure.Services
             tasks.Add(_settlementService.CreateAsync(settlement2Guid, user2Guid, 
                 "Settlement1"));
 
-            tasks.Add(_settlementService.AddExpenseAsync(settlement1Guid, user1Guid, 
+            tasks.Add(_expenseService.CreateAsync(settlement1Guid, user1Guid, 
                 "Expense1Name", 10m));
-            tasks.Add(_settlementService.AddExpenseAsync(settlement1Guid, user1Guid, 
+            tasks.Add(_expenseService.CreateAsync(settlement1Guid, user1Guid, 
                 "Expense2Name", 20m));
-            tasks.Add(_settlementService.AddExpenseAsync(settlement1Guid, user2Guid, 
+            tasks.Add(_expenseService.CreateAsync(settlement1Guid, user2Guid, 
                 "Expense3Name", 30m));
-            tasks.Add(_settlementService.AddExpenseAsync(settlement1Guid, user2Guid, 
+            tasks.Add(_expenseService.CreateAsync(settlement1Guid, user2Guid, 
                 "Expense4Name", 40m));
 
             await Task.WhenAll(tasks);

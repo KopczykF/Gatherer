@@ -43,6 +43,7 @@ namespace Gatherer.Api
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
             services.AddScoped<ISettlementRepository, SettlementRepository>();
+            services.AddScoped<IExpenseService, ExpenseService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISettlementService, SettlementService>();
             services.AddScoped<IUserService, UserService>();

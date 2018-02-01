@@ -23,6 +23,7 @@ namespace Gatherer.Api.Controllers
         
 
         [HttpGet("settlements")]
+        [Authorize]
         public async Task<IActionResult> GetSettlements()
         {
             throw new NotImplementedException();
