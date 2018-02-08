@@ -2,7 +2,7 @@ using System;
 
 namespace Gatherer.Infrastructure.Commands.Users
 {
-    public class Register
+    public class Register : ICommand
     {
         public Guid UserId { get; set; }
         public string Email { get; set; }

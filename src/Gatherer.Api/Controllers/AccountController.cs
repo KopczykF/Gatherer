@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Gatherer.Infrastructure.Commands;
 using Gatherer.Infrastructure.Commands.Users;
 using Gatherer.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,8 @@ namespace Gatherer.Api.Controllers
     {
         private IUserService _userService;
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, 
+            ICommandDispatcher commandDispatcher) : base (commandDispatcher)
         {
             _userService = userService;
         }
@@ -32,8 +34,7 @@ namespace Gatherer.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody]Register command)
         {
-            await _userService.RegisterAsync(Guid.NewGuid(),
-                command.Email, command.Name, command.Password, command.Role);
+            await _commandDispatcher.DispatchAsync(command);
 
             return Created("/account", null);
         }

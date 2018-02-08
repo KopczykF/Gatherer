@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
+      "Autofac/4.6.2": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.ComponentModel": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/Autofac.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/Autofac.dll": {}
+        }
+      },
       "AutoMapper/6.2.2": {
         "type": "package",
         "dependencies": {
@@ -1775,6 +1788,19 @@
     }
   },
   "libraries": {
+    "Autofac/4.6.2": {
+      "sha512": "wKI7F6+n45gqfq0T8FuB3hFzaCkuegiFo5in6uB1y2Ai9ZYcjue8yqk3yzyNEwBDS7AyvlTUGSoNovwpUuKqTw==",
+      "type": "package",
+      "path": "autofac/4.6.2",
+      "files": [
+        "autofac.4.6.2.nupkg.sha512",
+        "autofac.nuspec",
+        "lib/net45/Autofac.dll",
+        "lib/net45/Autofac.xml",
+        "lib/netstandard1.1/Autofac.dll",
+        "lib/netstandard1.1/Autofac.xml"
+      ]
+    },
     "AutoMapper/6.2.2": {
       "sha512": "eGKcnJdoF5rYMWPUaSPtlWdvua9xw4hnQN5kM/X4AXLGKghrtPIaMv+RYoA3sj0kyZ3X6wZ1Qj67F+u0pCCPaw==",
       "type": "package",
@@ -5877,6 +5903,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "AutoFac >= 4.6.2",
       "AutoMapper >= 6.2.2",
       "Gatherer.Core >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.0.1",
@@ -5928,6 +5955,10 @@
     "frameworks": {
       "netstandard2.0": {
         "dependencies": {
+          "AutoFac": {
+            "target": "Package",
+            "version": "[4.6.2, )"
+          },
           "AutoMapper": {
             "target": "Package",
             "version": "[6.2.2, )"

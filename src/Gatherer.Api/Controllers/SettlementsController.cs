@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Gatherer.Infrastructure.Commands;
 using Gatherer.Infrastructure.Commands.Settlement;
 using Gatherer.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +14,8 @@ namespace Gatherer.Api.Controllers
     {
         private readonly ISettlementService _settlementService;
 
-        public SettlementsController(ISettlementService settlementService)
+        public SettlementsController(ISettlementService settlementService, 
+            ICommandDispatcher commandDispatcher) : base (commandDispatcher)
         {
             _settlementService = settlementService;
         }

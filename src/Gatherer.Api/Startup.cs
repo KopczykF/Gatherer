@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Gatherer.Api.Framework;
 using Gatherer.Core.Repositories;
+using Gatherer.Infrastructure.IoC.Modules;
 using Gatherer.Infrastructure.Mappers;
 using Gatherer.Infrastructure.Repositories;
 using Gatherer.Infrastructure.Services;
@@ -23,6 +26,8 @@ namespace Gatherer.Api
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+        public IContainer ApplicationContainer { get; private set; }
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -33,10 +38,8 @@ namespace Gatherer.Api
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddMvc()
@@ -67,10 +70,18 @@ namespace Gatherer.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
+
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.RegisterModule<CommandModule>();
+            builder.RegisterType<Encrypter>().As<IEncrypter>().SingleInstance();
+            ApplicationContainer = builder.Build();
+
+            return new AutofacServiceProvider(ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -80,12 +91,13 @@ namespace Gatherer.Api
 
             app.UseAuthentication();
             app.UseMvc();
+            appLifetime.ApplicationStopped.Register(()=> ApplicationContainer.Dispose()); 
         }
 
         public void SeedData(IApplicationBuilder app)
         {
             var settings = app.ApplicationServices.GetService<IOptions<AppSettings>>();
-            if(settings.Value.SeedData)
+            if (settings.Value.SeedData)
             {
                 var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
                 dataInitializer.SeedAsync();
