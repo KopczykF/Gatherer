@@ -8,10 +8,9 @@ namespace Gatherer.Infrastructure.Services
 {
     public interface ISettlementService
     {
-        Task<SettlementDetailsDto> GetAsync(Guid id);
-        // Task<IEnumerable<SettlementDetailsDto>> GetForUserAsync(Guid userId);
+        Task<SettlementDetailsDto> GetAsync(Guid settlementId, Guid userId);
         Task CreateAsync(Guid id, Guid userId, string name, string description = null);
-        Task UpdateAsync(Guid id, string name, string description);
+        Task UpdateAsync(Guid settlementId, Guid userId, string name, string description);
         Task DeleteAsync(Guid id);
 
     }

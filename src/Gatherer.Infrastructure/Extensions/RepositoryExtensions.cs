@@ -30,6 +30,17 @@ namespace Gatherer.Infrastructure.Extensions
             return user;
         }
 
+        public static async Task<User> GetOrFailAsync(this IUserRepository repository, string email)
+        {
+            var user = await repository.GetAsync(email);
+            if (user == null)
+            {
+                throw new Exception($"User with email: '{email}' does not exist.");
+            }
+
+            return user;
+        }
+
         public static async Task<IEnumerable<Expense>> GetUserExpensesOrFailAsync(this ISettlementRepository repository, Guid id, Guid userId)
         {
             var settlement = await repository.GetSettlementOrFailAsync(id);
@@ -39,6 +50,16 @@ namespace Gatherer.Infrastructure.Extensions
                 throw new Exception($"User with id: '{id}' have not expenses in settlement with id: {id}");
             }
             return userExpenses;
+        }
+
+        public static async Task<User> HasAccessToSettlement(this IUserRepository repository, Guid userId, Guid settlementId)
+        {
+            var user = await repository.GetOrFailAsync(userId);
+            if (!user.HasSettlement(settlementId))
+            {
+                throw new Exception($"This user has not access to settlement with Id: {settlementId}");
+            }
+            return user;
         }
     }
 }

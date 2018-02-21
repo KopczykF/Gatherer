@@ -13,6 +13,7 @@ namespace Gatherer.Infrastructure.Mappers
                 cfg.CreateMap<Settlement, SettlementDetailsDto>();
                 cfg.CreateMap<Expense, ExpenseDto>();
                 cfg.CreateMap<User, AccountDto>();
+                cfg.CreateMap<User, UserDetailsDto>();
             })
             .CreateMapper();
     }

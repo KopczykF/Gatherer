@@ -8,7 +8,7 @@ namespace Gatherer.Infrastructure.Handlers.Users
 {
     public class RegisterHandler : ICommandHandler<Register>
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public RegisterHandler(IUserService userService)
         {

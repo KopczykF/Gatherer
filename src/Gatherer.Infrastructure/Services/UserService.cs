@@ -29,6 +29,12 @@ namespace Gatherer.Infrastructure.Services
             return _mapper.Map<AccountDto>(user);
         }
 
+        public async Task<AccountDto> GetAccountAsync(string email)
+        {
+            var user = await _userRepository.GetOrFailAsync(email);
+            return _mapper.Map<AccountDto>(user);
+        }
+
         public async Task RegisterAsync(Guid userId, string email, string name, string password, string role = "user")
         {
             var user = await _userRepository.GetAsync(email);
@@ -51,7 +57,7 @@ namespace Gatherer.Infrastructure.Services
             }
 
             var salt = _encrypter.GetSalt(password);
-            var hash = _encrypter.GetHash(password, salt);
+            var hash = _encrypter.GetHash(password, user.Salt);
             if (user.Password != hash)
             {
                 throw new Exception($"Invalid credentials.");

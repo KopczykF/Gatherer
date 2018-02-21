@@ -8,6 +8,7 @@ namespace Gatherer.Core.Domain
     {
         private static readonly Regex NameRegex = new Regex("^(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9._.-]+(?<![_.-])$");
         private readonly ISet<Guid> _userSettlements = new HashSet<Guid>();
+        private readonly ISet<Guid> _userFriends = new HashSet<Guid>();
         private static List<string> _roles = new List<string>
         {
             "user", "admin"
@@ -20,6 +21,7 @@ namespace Gatherer.Core.Domain
         public DateTime CreateAd { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public IEnumerable<Guid> UserSettlements => _userSettlements;
+        public IEnumerable<Guid> UserFriends => _userFriends;
         
 
         protected User()
@@ -112,5 +114,20 @@ namespace Gatherer.Core.Domain
             Salt = salt;
             UpdatedAt = DateTime.UtcNow;
         }
+
+        public void AddFriend(Guid friendId)
+            => _userFriends.Add(friendId);
+
+        public void RemoveFriend(Guid friendId)
+            => _userFriends.Remove(friendId);
+
+        public void AddSettlement(Guid settlementId)
+            => _userSettlements.Add(settlementId);
+
+        public void RemoveSettlement(Guid settlementId)
+            => _userSettlements.Remove(settlementId);
+
+        public bool HasSettlement(Guid settlementId)
+            => _userSettlements.Contains(settlementId);
     }
 }

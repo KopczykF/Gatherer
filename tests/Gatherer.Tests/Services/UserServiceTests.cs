@@ -20,8 +20,9 @@ namespace Gatherer.Tests.Services
             var userRepositoryMock = new Mock<IUserRepository>();
             var jwtHandlerMock = new Mock<IJwtHandler>();
             var mapperMock = new Mock<IMapper>();
+            var encrypter = new Mock<Encrypter>();
             var userService = new UserService(userRepositoryMock.Object, jwtHandlerMock.Object,
-                mapperMock.Object);
+                encrypter.Object, mapperMock.Object);
 
             //Act
             await userService.RegisterAsync(Guid.NewGuid(), "test@email.com", "test", "secret");
@@ -44,9 +45,10 @@ namespace Gatherer.Tests.Services
             var userRepositoryMock = new Mock<IUserRepository>();
             var jwtHandlerMock = new Mock<IJwtHandler>();
             var mapperMock = new Mock<IMapper>();
+            var encrypter = new Mock<Encrypter>();
             mapperMock.Setup(x => x.Map<AccountDto>(user)).Returns(accountDto);
             var userService = new UserService(userRepositoryMock.Object, jwtHandlerMock.Object,
-                mapperMock.Object);
+                encrypter.Object, mapperMock.Object);
             userRepositoryMock.Setup(x => x.GetAsync(user.Id)).ReturnsAsync(user);
 
             //Act

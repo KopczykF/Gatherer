@@ -4813,7 +4813,8 @@
           "AutoFac": "4.6.2",
           "AutoMapper": "6.2.2",
           "Gatherer.Core": "1.0.0",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.0.1"
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.0.1",
+          "Microsoft.Extensions.Caching.Memory": "2.0.0"
         },
         "compile": {
           "bin/placeholder/Gatherer.Infrastructure.dll": {}
@@ -12662,6 +12663,7 @@
       "Gatherer.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.5",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.0.1",
+      "Microsoft.Extensions.Caching.Memory >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0"
     ]
   },
@@ -12729,6 +12731,10 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[2.0.1, )"
+          },
+          "Microsoft.Extensions.Caching.Memory": {
+            "target": "Package",
+            "version": "[2.0.0, )"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",

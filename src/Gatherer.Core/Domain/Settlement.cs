@@ -21,14 +21,14 @@ namespace Gatherer.Core.Domain
             SetDescription(Description);
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            _usersExpenseList.Add(userId, new List<Expense>());
+            AddUser(userId);
         }
 
         public void SetName(string name)
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new Exception($"Settlement with Id: '{Id}' can not have empty name. ");
+                throw new Exception($"Settlement with Id: '{Id}' can not have empty name.");
             }
 
             Name = name;
@@ -39,6 +39,15 @@ namespace Gatherer.Core.Domain
         {
             Description = description;
             UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void AddUser(Guid userId)
+        {
+            if(_usersExpenseList.ContainsKey(userId))
+            {
+                throw new Exception($"User with Id: {userId} was already added to this settlement.");
+            }
+            _usersExpenseList.Add(userId, new List<Expense>());
         }
 
         public void AddExpense(Expense expense)
@@ -65,7 +74,8 @@ namespace Gatherer.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public IEnumerable<Expense> GetUserExpenses(Guid userId) => _usersExpenseList[userId];
+        public IEnumerable<Expense> GetUserExpenses(Guid userId) 
+            => _usersExpenseList[userId];
 
         public Expense GetUserExpense(Guid userId, Guid expenseId)
         {

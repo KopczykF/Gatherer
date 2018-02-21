@@ -10,21 +10,26 @@ namespace Gatherer.Api.Controllers
 {
     [Route("[controller]")]
     [Authorize(Policy = "user")]
-    public class SettlementsController : ApiControllerBase
+    public class UserController : ApiControllerBase
     {
+        private readonly IUserService _userService;
         private readonly ISettlementService _settlementService;
-
-        public SettlementsController(ISettlementService settlementService, 
-            ICommandDispatcher commandDispatcher) : base (commandDispatcher)
+        public UserController(IUserService userService, ISettlementService settlementService,
+            ICommandDispatcher commandDispatcher) : base(commandDispatcher)
         {
             _settlementService = settlementService;
+            _userService = userService;
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Get() => Json(await _userService.GetAccountAsync(UserId));
 
         [HttpGet("{settlementId}")]
         public async Task<IActionResult> Get(Guid settlementid)
         {
-            var settlement = await _settlementService.GetAsync(settlementid);
-            if(settlement == null)
+            var settlement = await _settlementService.GetAsync(settlementid, UserId);
+            if (settlement == null)
             {
                 return NotFound();
             }
@@ -35,17 +40,18 @@ namespace Gatherer.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateSettlement command)
         {
-            command.SettlementId = Guid.NewGuid();
-            await _settlementService.CreateAsync(command.SettlementId, UserId, 
-                command.Name, command.Description);
+            command.UserId = UserId;
+            await _commandDispatcher.DispatchAsync(command);
 
-            return Created($"/settlements/{command.SettlementId}", null);
+            return Created($"/settlement/{command.SettlementId}", null);
         }
 
         [HttpPut("{settlementId}")]
         public async Task<IActionResult> Put(Guid settlementId, [FromBody]UpdateSettlement command)
         {
-            await _settlementService.UpdateAsync(settlementId, command.Name, command.Description);
+            command.UserId = UserId;
+            command.SettlementId = settlementId;
+            await _commandDispatcher.DispatchAsync(command);
 
             return NoContent();
         }

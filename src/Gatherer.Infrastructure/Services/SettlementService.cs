@@ -22,18 +22,13 @@ namespace Gatherer.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<SettlementDetailsDto> GetAsync(Guid id)
+        public async Task<SettlementDetailsDto> GetAsync(Guid settlementId, Guid userId)
         {
-            // var user = await _userRepository.GetOrFailAsync(userId);
-            var settlement = await _settlementRepository.GetAsync(id);
+            var user = await _userRepository.HasAccessToSettlement(userId, settlementId);
+            var settlement = await _settlementRepository.GetAsync(settlementId);
 
             return _mapper.Map<SettlementDetailsDto>(settlement);
         }
-
-        // public async Task<IEnumerable<SettlementDetailsDto>> GetForUserAsync(Guid userId)
-        // {
-        //     var user = await
-        // }
 
         public async Task CreateAsync(Guid id, Guid userId, string name, string description = null)
         {
@@ -44,19 +39,29 @@ namespace Gatherer.Infrastructure.Services
             }
             settlement = new Settlement(id, userId, name, description);
             await _settlementRepository.AddAsync(settlement);
+            var user = await _userRepository.GetAsync(userId);
+            user.AddSettlement(id);
         }
 
-        public async Task UpdateAsync(Guid settlementId, string name, string description)
+        public async Task UpdateAsync(Guid settlementId, Guid userId, string name, string description)
         {
+            var user = await _userRepository.HasAccessToSettlement(userId, settlementId);
+
             var settlement = await _settlementRepository.GetSettlementOrFailAsync(settlementId);
             settlement.SetName(name);
             settlement.SetDescription(description);
+            
             await _settlementRepository.UpdateSettlementAsync(settlement);
         }
 
         public async Task DeleteAsync(Guid settlementId)
         {
             var settlement = await _settlementRepository.GetSettlementOrFailAsync(settlementId);
+            foreach (var userId in settlement.UsersExpenseList)
+            {
+                var user = await _userRepository.GetAsync(userId.Key);
+                user.RemoveSettlement(settlementId);
+            }
             await _settlementRepository.DeleteSettlementAsync(settlement);
         }
     }
