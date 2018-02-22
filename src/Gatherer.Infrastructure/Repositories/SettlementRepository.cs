@@ -14,6 +14,9 @@ namespace Gatherer.Infrastructure.Repositories
         public async Task<Settlement> GetAsync(Guid id) 
             => await Task.FromResult(_settlements.SingleOrDefault(x => x.Id == id));
 
+        public async Task<IEnumerable<Settlement>> Browse() 
+            => await Task.FromResult(_settlements.AsEnumerable());
+
         public async Task AddAsync(Settlement settlement)
         {
             _settlements.Add(settlement);

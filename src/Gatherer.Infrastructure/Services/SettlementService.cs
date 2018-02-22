@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Gatherer.Core.Domain;
@@ -15,7 +16,8 @@ namespace Gatherer.Infrastructure.Services
         private readonly ISettlementRepository _settlementRepository;
         private readonly IMapper _mapper;
 
-        public SettlementService(ISettlementRepository settlementRepository, IUserRepository userRepository, IMapper mapper)
+        public SettlementService(ISettlementRepository settlementRepository,
+            IUserRepository userRepository, IMapper mapper)
         {
             _settlementRepository = settlementRepository;
             _userRepository = userRepository;
@@ -30,17 +32,27 @@ namespace Gatherer.Infrastructure.Services
             return _mapper.Map<SettlementDetailsDto>(settlement);
         }
 
-        public async Task CreateAsync(Guid id, Guid userId, string name, string description = null)
+        public async Task<IEnumerable<SettlementDetailsDto>> GetSettlementsAsync(Guid userId)
         {
-            var settlement = await _settlementRepository.GetAsync(id);
+            var user = await _userRepository.GetAsync(userId);
+            var settlements = await _settlementRepository.Browse();
+
+            var result = settlements.Join(user.UserSettlements, s => s.Id, u => u, (s, u) => s);
+
+            return _mapper.Map<IEnumerable<SettlementDetailsDto>>(result);
+        }
+
+        public async Task CreateAsync(Guid settlementId, Guid userId, string name, string description = null)
+        {
+            var settlement = await _settlementRepository.GetAsync(settlementId);
             if (settlement != null)
             {
-                throw new Exception($"Settlement with id: '{id}' already exist.");
+                throw new Exception($"Settlement with id: '{settlementId}' already exist.");
             }
-            settlement = new Settlement(id, userId, name, description);
+            settlement = new Settlement(settlementId, userId, name, description);
             await _settlementRepository.AddAsync(settlement);
             var user = await _userRepository.GetAsync(userId);
-            user.AddSettlement(id);
+            user.AddSettlement(settlementId);
         }
 
         public async Task UpdateAsync(Guid settlementId, Guid userId, string name, string description)
@@ -50,7 +62,7 @@ namespace Gatherer.Infrastructure.Services
             var settlement = await _settlementRepository.GetSettlementOrFailAsync(settlementId);
             settlement.SetName(name);
             settlement.SetDescription(description);
-            
+
             await _settlementRepository.UpdateSettlementAsync(settlement);
         }
 

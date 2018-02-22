@@ -22,18 +22,6 @@ namespace Gatherer.Api.Controllers
             _cache = cache;
         }
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Get() 
-            => Json(await _userService.GetAccountAsync(UserId));
-
-        [HttpGet("settlements")]
-        [Authorize]
-        public async Task<IActionResult> GetSettlements()
-        {
-            throw new NotImplementedException();
-        }
-
         [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody] Register command)
         {

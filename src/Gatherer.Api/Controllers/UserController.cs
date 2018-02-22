@@ -22,19 +22,31 @@ namespace Gatherer.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Get() => Json(await _userService.GetAccountAsync(UserId));
+        public async Task<IActionResult> Get() 
+            => Json(await _userService.GetAccountAsync(UserId));
 
         [HttpGet("{settlementId}")]
-        public async Task<IActionResult> Get(Guid settlementid)
+        public async Task<IActionResult> GetSettlement(Guid settlementId)
         {
-            var settlement = await _settlementService.GetAsync(settlementid, UserId);
+            var settlement = await _settlementService.GetAsync(settlementId, UserId);
             if (settlement == null)
             {
                 return NotFound();
             }
 
             return Json(settlement);
+        }
+
+        [HttpGet("settlements")]
+        public async Task<IActionResult> GetSettlements()
+        {
+            var settlements = await _settlementService.GetSettlementsAsync(UserId);
+            if (settlements == null)
+            {
+                return NotFound();
+            }
+
+            return Json(settlements);
         }
 
         [HttpPost]

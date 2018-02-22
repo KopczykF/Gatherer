@@ -8,6 +8,7 @@ namespace Gatherer.Core.Repositories
     public interface ISettlementRepository
     {
         Task<Settlement> GetAsync(Guid id);
+        Task<IEnumerable<Settlement>> Browse();
         Task AddAsync(Settlement settlement);
         Task AddExpenseAsync(Expense expense, Guid settlementId);
         Task UpdateSettlementAsync(Settlement settlement);

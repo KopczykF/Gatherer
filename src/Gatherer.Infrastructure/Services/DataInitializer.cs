@@ -30,7 +30,7 @@ namespace Gatherer.Infrastructure.Services
             
             tasks.Add(_settlementService.CreateAsync(settlement1Guid, user1Guid, 
                 "Settlement1"));
-            tasks.Add(_settlementService.CreateAsync(settlement2Guid, user2Guid, 
+            tasks.Add(_settlementService.CreateAsync(settlement2Guid, user1Guid, 
                 "Settlement1"));
 
             tasks.Add(_expenseService.CreateAsync(settlement1Guid, user1Guid, 
