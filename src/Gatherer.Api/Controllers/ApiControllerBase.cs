@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Gatherer.Api.Controllers
 {
-    [Route("[controller]")]
     public abstract class ApiControllerBase : Controller
     {
         protected readonly ICommandDispatcher _commandDispatcher;
 
-        protected Guid UserId => User?.Identity?.IsAuthenticated == true ?
+        protected Guid CurrentUserId => User?.Identity?.IsAuthenticated == true ?
             Guid.Parse(User.Identity.Name) :
             Guid.Empty;
 

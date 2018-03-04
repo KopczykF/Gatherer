@@ -6,7 +6,7 @@ namespace Gatherer.Infrastructure.Services
 {
     public interface IUserService
     {
-        Task<AccountDto> GetAccountAsync(Guid userId);
+        Task<AccountDto> GetAccountAsync(Guid currentUserId);
         Task<AccountDto> GetAccountAsync(string email);
         Task RegisterAsync(Guid userId, string email, string name,
             string password, string role = "user");

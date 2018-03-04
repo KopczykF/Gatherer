@@ -23,9 +23,9 @@ namespace Gatherer.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<AccountDto> GetAccountAsync(Guid userId)
+        public async Task<AccountDto> GetAccountAsync(Guid currentUserId)
         {
-            var user = await _userRepository.GetOrFailAsync(userId);
+            var user = await _userRepository.GetOrFailAsync(currentUserId);
             return _mapper.Map<AccountDto>(user);
         }
 

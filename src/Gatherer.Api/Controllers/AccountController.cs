@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Gatherer.Api.Controllers
 {
+    [Route("[controller]")]
     public class AccountController : ApiControllerBase
     {
         private readonly IUserService _userService;

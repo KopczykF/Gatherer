@@ -17,7 +17,7 @@ namespace Gatherer.Infrastructure.Handlers.Settlements
         public async Task HandleAsync(CreateSettlement command)
         {
             command.SettlementId = Guid.NewGuid();
-            await _settlementService.CreateAsync(command.SettlementId, command.UserId, 
+            await _settlementService.CreateAsync(command.SettlementId, command.CurrentUserId, 
                 command.Name, command.Description);
         }
     }

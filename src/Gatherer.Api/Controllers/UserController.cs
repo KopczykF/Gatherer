@@ -23,12 +23,12 @@ namespace Gatherer.Api.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Get() 
-            => Json(await _userService.GetAccountAsync(UserId));
+            => Json(await _userService.GetAccountAsync(CurrentUserId));
 
         [HttpGet("{settlementId}")]
         public async Task<IActionResult> GetSettlement(Guid settlementId)
         {
-            var settlement = await _settlementService.GetAsync(settlementId, UserId);
+            var settlement = await _settlementService.GetAsync(settlementId, CurrentUserId);
             if (settlement == null)
             {
                 return NotFound();
@@ -40,7 +40,7 @@ namespace Gatherer.Api.Controllers
         [HttpGet("settlements")]
         public async Task<IActionResult> GetSettlements()
         {
-            var settlements = await _settlementService.GetSettlementsAsync(UserId);
+            var settlements = await _settlementService.GetSettlementsAsync(CurrentUserId);
             if (settlements == null)
             {
                 return NotFound();
@@ -52,7 +52,7 @@ namespace Gatherer.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateSettlement command)
         {
-            command.UserId = UserId;
+            command.CurrentUserId = CurrentUserId;
             await _commandDispatcher.DispatchAsync(command);
 
             return Created($"/settlement/{command.SettlementId}", null);
@@ -61,7 +61,7 @@ namespace Gatherer.Api.Controllers
         [HttpPut("{settlementId}")]
         public async Task<IActionResult> Put(Guid settlementId, [FromBody]UpdateSettlement command)
         {
-            command.UserId = UserId;
+            command.CurrentUserId = CurrentUserId;
             command.SettlementId = settlementId;
             await _commandDispatcher.DispatchAsync(command);
 

@@ -24,16 +24,9 @@ namespace Gatherer.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ExpenseDto>> GetForUserAsync(Guid settlementId, Guid userId)
+        public async Task<ExpenseDto> GetAsync(Guid settlementId, Guid userId, Guid expenseId, Guid currentUserId)
         {
-            var userExpenses = await _settlementRepository.GetUserExpensesOrFailAsync(settlementId, userId);
-
-            return _mapper.Map<IEnumerable<ExpenseDto>>(userExpenses);
-        }
-
-        public async Task<ExpenseDto> GetAsync(Guid settlementId, Guid userId, Guid expenseId)
-        {
-            var userExpenses = await _settlementRepository.GetUserExpensesOrFailAsync(settlementId, userId);
+            var userExpenses = await _settlementRepository.GetExpensesOrFailAsync(settlementId, userId, currentUserId);
             var expense = userExpenses.SingleOrDefault(x => x.Id == expenseId);
 
             if (userExpenses == null)
@@ -54,7 +47,7 @@ namespace Gatherer.Infrastructure.Services
 
         public async Task UpdateAsync(Guid settlementId, Guid userId, Guid expenseId, string name, decimal cost)
         {
-            var userExpenses = await _settlementRepository.GetUserExpensesOrFailAsync(settlementId, userId);
+            var userExpenses = await _settlementRepository.GetExpensesOrFailAsync(settlementId, userId);
             var expense = userExpenses.SingleOrDefault(x => x.Id == expenseId);
             if (userExpenses == null)
             {

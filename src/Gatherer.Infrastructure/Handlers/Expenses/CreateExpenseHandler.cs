@@ -15,7 +15,7 @@ namespace Gatherer.Infrastructure.Handlers.Expenses
 
         public async Task HandleAsync(CreateExpense command)
         {
-            await _expenseService.CreateAsync(command.SettlementId, command.UserId, 
+            await _expenseService.CreateAsync(command.SettlementId, command.CurrentUserId, 
                 command.Name, command.Cost);
         }
     }

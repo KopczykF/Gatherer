@@ -41,13 +41,28 @@ namespace Gatherer.Infrastructure.Extensions
             return user;
         }
 
-        public static async Task<IEnumerable<Expense>> GetUserExpensesOrFailAsync(this ISettlementRepository repository, Guid id, Guid userId)
+        public static async Task<IEnumerable<Expense>> GetExpensesOrFailAsync(this ISettlementRepository repository, Guid settlementId, Guid userId, Guid currentUserId)
         {
-            var settlement = await repository.GetSettlementOrFailAsync(id);
-            var userExpenses = settlement.GetUserExpenses(userId);
+            var settlement = await repository.GetSettlementOrFailAsync(settlementId);
+            if (!settlement.HasUser(currentUserId))
+            {
+                throw new Exception($"User with id: '{currentUserId}' have not expenses in settlement with id: {settlementId}");
+            }
+            var userExpenses = settlement.GetExpenses(userId);
             if (userExpenses == null)
             {
-                throw new Exception($"User with id: '{id}' have not expenses in settlement with id: {id}");
+                throw new Exception($"User with id: '{userId}' have not expenses in settlement with id: {settlementId}");
+            }
+            return userExpenses;
+        }
+
+        public static async Task<IEnumerable<Expense>> GetExpensesOrFailAsync(this ISettlementRepository repository, Guid settlementId, Guid currentUserId)
+        {
+            var settlement = await repository.GetSettlementOrFailAsync(settlementId);
+            var userExpenses = settlement.GetExpenses(currentUserId);
+            if (userExpenses == null)
+            {
+                throw new Exception($"User with id: '{currentUserId}' have not expenses in settlement with id: {settlementId}");
             }
             return userExpenses;
         }

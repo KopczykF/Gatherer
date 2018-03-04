@@ -6,11 +6,13 @@ namespace Gatherer.Core.Domain
     public class Settlement : Entity
     {
         private Dictionary<Guid, List<Expense>> _usersExpenseList = new Dictionary<Guid, List<Expense>>();
+        private Dictionary<Guid, Dictionary<Guid, decimal>> _usersDebts = new Dictionary<Guid, Dictionary<Guid, decimal>>();
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public IEnumerable<KeyValuePair<Guid, List<Expense>> > UsersExpenseList => _usersExpenseList;
+        public IEnumerable<KeyValuePair<Guid, Dictionary<Guid, decimal>>> UsersDebts => _usersDebts;
 
         protected Settlement() { }
 
@@ -74,8 +76,14 @@ namespace Gatherer.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public IEnumerable<Expense> GetUserExpenses(Guid userId) 
-            => _usersExpenseList[userId];
+        public IEnumerable<Expense> GetExpenses(Guid userId)
+        {
+            if (!_usersExpenseList.ContainsKey(userId))
+            {
+                throw new Exception($"User with Id: {userId} have not expenses in this settlement");
+            }
+            return _usersExpenseList[userId]; 
+        }
 
         public Expense GetUserExpense(Guid userId, Guid expenseId)
         {
@@ -89,5 +97,7 @@ namespace Gatherer.Core.Domain
             }
             return _usersExpenseList[userId].Find((x => x.Id == expenseId));
         }
+
+        public bool HasUser(Guid userId) => _usersExpenseList.ContainsKey(userId);
     }
 }

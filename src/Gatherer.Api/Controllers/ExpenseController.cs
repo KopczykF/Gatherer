@@ -5,41 +5,37 @@ using Gatherer.Infrastructure.Commands.Expense;
 using Gatherer.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace Gatherer.Api.Controllers
 {
-    [Route("{settlementId}/[controller]")]
+    [Route("[controller]")]
     [Authorize(Policy = "user")]
     public class ExpenseController : ApiControllerBase
     {
         private readonly IExpenseService _expenseService;
-        public ExpenseController(IExpenseService expenseService,
+        private readonly IMemoryCache _cache;
+        public ExpenseController(IExpenseService expenseService, IMemoryCache cache,
             ICommandDispatcher commandDispatcher) : base(commandDispatcher)
         {
             _expenseService = expenseService;
-        }
-
-        [HttpGet("{expenseId}")]
-        public async Task<IActionResult> GetExpense(Guid settlementId, Guid expenseId)
-        {
-            var expense = await _expenseService.GetAsync(settlementId, UserId, expenseId);
-
-            return Json(expense);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetForSettlement(Guid settlementId)
-        {
-            var expenses = await _expenseService.GetForUserAsync(settlementId, UserId);
-
-            return Json(expenses);
+            _cache = cache;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Guid settlementId, [FromBody]CreateExpense command)
+        public async Task<IActionResult> GetExpense([FromBody]GetExpense command)
         {
-            command.UserId = UserId;
+            command.CurrentUserId = CurrentUserId;
+            await _commandDispatcher.DispatchAsync(command);
+            
+            return Json(_cache.Get(command.ExpenseId));
+        }
+
+        [HttpPost("{settlementId}")]
+        public async Task<IActionResult> Post([FromBody]CreateExpense command, Guid settlementId)
+        {
+            command.CurrentUserId = CurrentUserId;
             command.SettlementId = settlementId;
             await _commandDispatcher.DispatchAsync(command);
 

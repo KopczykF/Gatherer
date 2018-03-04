@@ -13,6 +13,6 @@ namespace Gatherer.Infrastructure.Handlers.Settlements
             _settlementService = settlementService;
         }
         public async Task HandleAsync(UpdateSettlement command) 
-            => await _settlementService.UpdateAsync(command.SettlementId, command.UserId, command.Name, command.Description);
+            => await _settlementService.UpdateAsync(command.SettlementId, command.CurrentUserId, command.Name, command.Description);
     }
 }

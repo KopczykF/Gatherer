@@ -7,6 +7,7 @@ namespace Gatherer.Core.Domain
     public class User : Entity
     {
         private static readonly Regex NameRegex = new Regex("^(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9._.-]+(?<![_.-])$");
+        private static readonly Regex EmailRegex = new Regex(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
         private readonly ISet<Guid> _userSettlements = new HashSet<Guid>();
         private readonly ISet<Guid> _userFriends = new HashSet<Guid>();
         private static List<string> _roles = new List<string>
@@ -60,6 +61,10 @@ namespace Gatherer.Core.Domain
             if (string.IsNullOrWhiteSpace(email))
             {
                 throw new Exception("Email can not be empty.");
+            }
+            if (!EmailRegex.IsMatch(email))
+            {
+                throw new Exception("Email is invalid.");
             }
             if (Email == email)
             {

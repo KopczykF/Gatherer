@@ -24,17 +24,17 @@ namespace Gatherer.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<SettlementDetailsDto> GetAsync(Guid settlementId, Guid userId)
+        public async Task<SettlementDetailsDto> GetAsync(Guid settlementId, Guid currentUserId)
         {
-            var user = await _userRepository.HasAccessToSettlement(userId, settlementId);
+            var user = await _userRepository.HasAccessToSettlement(currentUserId, settlementId);
             var settlement = await _settlementRepository.GetAsync(settlementId);
 
             return _mapper.Map<SettlementDetailsDto>(settlement);
         }
 
-        public async Task<IEnumerable<SettlementDetailsDto>> GetSettlementsAsync(Guid userId)
+        public async Task<IEnumerable<SettlementDetailsDto>> GetSettlementsAsync(Guid currentUserId)
         {
-            var user = await _userRepository.GetAsync(userId);
+            var user = await _userRepository.GetAsync(currentUserId);
             var settlements = await _settlementRepository.Browse();
 
             var result = settlements.Join(user.UserSettlements, s => s.Id, u => u, (s, u) => s);
