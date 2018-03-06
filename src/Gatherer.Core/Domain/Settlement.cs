@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Gatherer.Core.Enums;
 
 namespace Gatherer.Core.Domain
 {
@@ -9,18 +10,20 @@ namespace Gatherer.Core.Domain
         private Dictionary<Guid, Dictionary<Guid, decimal>> _usersDebts = new Dictionary<Guid, Dictionary<Guid, decimal>>();
         public string Name { get; protected set; }
         public string Description { get; protected set; }
+        public SettleTypesEnum SettleType { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public IEnumerable<KeyValuePair<Guid, List<Expense>> > UsersExpenseList => _usersExpenseList;
-        public IEnumerable<KeyValuePair<Guid, Dictionary<Guid, decimal>>> UsersDebts => _usersDebts;
+        public IEnumerable<KeyValuePair<Guid, Dictionary<Guid, decimal>> > UsersDebts => _usersDebts;
 
         protected Settlement() { }
 
-        public Settlement(Guid id, Guid userId, string name, string description = null)
+        public Settlement(Guid id, Guid userId, string name, string description = null, int settleType = 0)
         {
             Id = id;
             SetName(name);
             SetDescription(Description);
+            SetSettleType(settleType);
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             AddUser(userId);
@@ -40,6 +43,25 @@ namespace Gatherer.Core.Domain
         public void SetDescription(string description)
         {
             Description = description;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void SetSettleType(int settleType)
+        {
+            //0 because oneTransfer is not implemented
+            if (settleType < 0 && settleType > 0)
+            {
+                throw new Exception("User can not have this settle type");
+            }
+            switch (settleType)
+            {
+                case 0:
+                    SettleType = SettleTypesEnum.simple;
+                    break;
+                case 1:
+                    SettleType = SettleTypesEnum.oneTransfer;
+                    break;
+            }
             UpdatedAt = DateTime.UtcNow;
         }
 
@@ -99,5 +121,9 @@ namespace Gatherer.Core.Domain
         }
 
         public bool HasUser(Guid userId) => _usersExpenseList.ContainsKey(userId);
+
+        public void AddUserDebt(Guid user1, Guid user2, decimal debt)
+            => _usersDebts.Add(user1, new Dictionary<Guid, decimal>(){{user2, debt}});
+        
     }
 }

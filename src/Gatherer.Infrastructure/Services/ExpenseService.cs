@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gatherer.Core.Managers;
 
 namespace Gatherer.Infrastructure.Services
 {
@@ -16,6 +17,7 @@ namespace Gatherer.Infrastructure.Services
         private readonly ISettlementRepository _settlementRepository;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private ISettlementManager manager = new SettlementManager();
 
         public ExpenseService(ISettlementRepository settlementRepository, IUserRepository userRepository, IMapper mapper)
         {
@@ -43,6 +45,7 @@ namespace Gatherer.Infrastructure.Services
             await _settlementRepository.AddExpenseAsync(expense, settlementId);
             var user = await _userRepository.GetAsync(userId);
             user.AddSettlement(settlementId);
+            manager.Settle(settlement);
         }
 
         public async Task UpdateAsync(Guid settlementId, Guid userId, Guid expenseId, string name, decimal cost)
@@ -55,6 +58,7 @@ namespace Gatherer.Infrastructure.Services
             }
             expense.SetName(name);
             expense.SetCost(cost);
+            manager.Settle(await _settlementRepository.GetAsync(settlementId));
 
             await _settlementRepository.UpdateExpenseAsync(expense);
         }

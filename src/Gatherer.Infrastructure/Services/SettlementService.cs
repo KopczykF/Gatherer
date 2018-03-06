@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Gatherer.Core.Domain;
+using Gatherer.Core.Managers;
 using Gatherer.Core.Repositories;
 using Gatherer.Infrastructure.DTO;
 using Gatherer.Infrastructure.Extensions;
@@ -15,6 +16,7 @@ namespace Gatherer.Infrastructure.Services
         private readonly IUserRepository _userRepository;
         private readonly ISettlementRepository _settlementRepository;
         private readonly IMapper _mapper;
+        private ISettlementManager manager = new SettlementManager();
 
         public SettlementService(ISettlementRepository settlementRepository,
             IUserRepository userRepository, IMapper mapper)
@@ -42,17 +44,18 @@ namespace Gatherer.Infrastructure.Services
             return _mapper.Map<IEnumerable<SettlementDetailsDto>>(result);
         }
 
-        public async Task CreateAsync(Guid settlementId, Guid userId, string name, string description = null)
+        public async Task CreateAsync(Guid settlementId, Guid userId, string name, string description = null, int settleType = 0)
         {
             var settlement = await _settlementRepository.GetAsync(settlementId);
             if (settlement != null)
             {
                 throw new Exception($"Settlement with id: '{settlementId}' already exist.");
             }
-            settlement = new Settlement(settlementId, userId, name, description);
+            settlement = new Settlement(settlementId, userId, name, description, settleType);
             await _settlementRepository.AddAsync(settlement);
             var user = await _userRepository.GetAsync(userId);
             user.AddSettlement(settlementId);
+            manager.Settle(settlement);
         }
 
         public async Task UpdateAsync(Guid settlementId, Guid userId, string name, string description)
@@ -62,6 +65,7 @@ namespace Gatherer.Infrastructure.Services
             var settlement = await _settlementRepository.GetSettlementOrFailAsync(settlementId);
             settlement.SetName(name);
             settlement.SetDescription(description);
+            manager.Settle(settlement);
 
             await _settlementRepository.UpdateSettlementAsync(settlement);
         }

@@ -8,6 +8,7 @@ namespace Gatherer.Infrastructure.Commands.Settlement
         public Guid SettlementId { get; set; }
         public Guid CurrentUserId { get; set; }
         public string Name { get; set; }
+        public int SettleType { get; set; }
         public string Description { get; set; }
     }
 }
