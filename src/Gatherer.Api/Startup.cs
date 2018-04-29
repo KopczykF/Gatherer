@@ -7,6 +7,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Gatherer.Api.Framework;
 using Gatherer.Core.Repositories;
+using Gatherer.Infrastructure.IoC;
 using Gatherer.Infrastructure.IoC.Modules;
 using Gatherer.Infrastructure.Mappers;
 using Gatherer.Infrastructure.Repositories;
@@ -47,13 +48,7 @@ namespace Gatherer.Api
             services.AddMvc()
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
-            services.AddScoped<ISettlementRepository, SettlementRepository>();
-            services.AddScoped<IExpenseService, ExpenseService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ISettlementService, SettlementService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDataInitializer, DataInitializer>();
-            services.AddSingleton(AutoMapperConfig.Initialize());
             services.AddSingleton<IJwtHandler, JwtHandler>();
             services.Configure<JwtSettings>(Configuration.GetSection("jwt"));
             services.Configure<AppSettings>(Configuration.GetSection("app"));
@@ -77,7 +72,7 @@ namespace Gatherer.Api
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
-            builder.RegisterModule<CommandModule>();
+            builder.RegisterModule(new ContainerModule(Configuration));
             builder.RegisterType<Encrypter>().As<IEncrypter>().SingleInstance();
             ApplicationContainer = builder.Build();
 

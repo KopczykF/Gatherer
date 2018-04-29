@@ -5,7 +5,7 @@ using Gatherer.Core.Domain;
 
 namespace Gatherer.Core.Repositories
 {
-    public interface ISettlementRepository
+    public interface ISettlementRepository : IRepository
     {
         Task<Settlement> GetAsync(Guid id);
         Task<IEnumerable<Settlement>> Browse();

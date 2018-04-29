@@ -5,7 +5,7 @@ using Gatherer.Infrastructure.DTO;
 
 namespace Gatherer.Infrastructure.Services
 {
-    public interface IExpenseService
+    public interface IExpenseService : IService
     {
          Task<ExpenseDto> GetAsync(Guid settlementId, Guid userId, Guid expenseId, Guid currentUserId);
          Task CreateAsync(Guid settlementId, Guid userId, string name, decimal cost);

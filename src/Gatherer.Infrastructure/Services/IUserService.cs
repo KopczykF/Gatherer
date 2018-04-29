@@ -4,7 +4,7 @@ using Gatherer.Infrastructure.DTO;
 
 namespace Gatherer.Infrastructure.Services
 {
-    public interface IUserService
+    public interface IUserService : IService
     {
         Task<AccountDto> GetAccountAsync(Guid currentUserId);
         Task<AccountDto> GetAccountAsync(string email);

@@ -6,7 +6,7 @@ using Gatherer.Infrastructure.DTO;
 
 namespace Gatherer.Infrastructure.Services
 {
-    public interface ISettlementService
+    public interface ISettlementService : IService
     {
         Task<SettlementDetailsDto> GetAsync(Guid settlementId, Guid currentUserId);
         Task<IEnumerable<SettlementDetailsDto>> GetSettlementsAsync(Guid currentUserI);
