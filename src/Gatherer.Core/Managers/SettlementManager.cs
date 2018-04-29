@@ -12,10 +12,10 @@ namespace Gatherer.Core.Managers
         {
             switch (settlement.SettleType)
             {
-                case SettleTypesEnum.simple:
+                case SettleTypesEnum.Simple:
                     context = new Context(new SimpleSettleType());
                     break;
-                case SettleTypesEnum.oneTransfer:
+                case SettleTypesEnum.OneTransfer:
                     context = new Context(new OneTransferSettleType());
                     break;
             }

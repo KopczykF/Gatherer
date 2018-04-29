@@ -56,10 +56,10 @@ namespace Gatherer.Core.Domain
             switch (settleType)
             {
                 case 0:
-                    SettleType = SettleTypesEnum.simple;
+                    SettleType = SettleTypesEnum.Simple;
                     break;
                 case 1:
-                    SettleType = SettleTypesEnum.oneTransfer;
+                    SettleType = SettleTypesEnum.OneTransfer;
                     break;
             }
             UpdatedAt = DateTime.UtcNow;
@@ -123,7 +123,16 @@ namespace Gatherer.Core.Domain
         public bool HasUser(Guid userId) => _usersExpenseList.ContainsKey(userId);
 
         public void AddUserDebt(Guid user1, Guid user2, decimal debt)
-            => _usersDebts.Add(user1, new Dictionary<Guid, decimal>(){{user2, debt}});
-        
+        {
+            if(!_usersDebts.ContainsKey(user1))
+            {
+                _usersDebts.Add(user1, new Dictionary<Guid, decimal>());
+            }
+            if (!_usersDebts[user1].ContainsKey(user2))
+            {
+                _usersDebts[user1].Add(user2, debt);
+            }
+            _usersDebts[user1][user2] = debt;
+        }
     }
 }

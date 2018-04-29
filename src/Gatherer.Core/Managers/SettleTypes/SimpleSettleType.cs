@@ -13,30 +13,27 @@ namespace Gatherer.Core.Managers.SettleTypes
             var average = settlement.GetAverage();
             var usersCost = settlement.GetUsersCost();
 
-            Dictionary<Guid, decimal> usersDebs = new Dictionary<Guid, decimal>();
+            Dictionary<Guid, decimal> usersDebts = new Dictionary<Guid, decimal>();
 
             foreach (var user in usersCost)
             {
-                usersDebs.Add(user.Key, user.Value - average);
+                usersDebts.Add(user.Key, user.Value - average);
             }
 
-            var ordered = usersDebs.OrderBy(x => x.Value);
+            var ordered = usersDebts.OrderBy(x => x.Value);
 
             foreach (var user1 in ordered)
             {
-                //skip user1 while he has not debt
-                if (user1.Value >= 0)
+                if (user1.Value < 0)
                 {
-                    continue;
-                }
-                foreach (var user2 in ordered)
-                {
-                    if (user2.Value <= 0 && user2.Value + user1.Value < 0)
+                    foreach (var user2 in ordered)
                     {
-                        continue;
+                        if (user1.Key != user2.Key && user2.Value > 0 && user2.Value + user1.Value >= 0)
+                        {
+                            settlement.AddUserDebt(user1.Key, user2.Key, -user1.Value);
+                            usersDebts[user2.Key] -= user1.Value;
+                        }
                     }
-                    settlement.AddUserDebt(user1.Key, user2.Key, -user1.Value);
-                    usersDebs[user2.Key] -= user1.Value;
                 }
             }
         }
