@@ -5,6 +5,7 @@ using Gatherer.Core.Repositories;
 using Gatherer.Infrastructure.DTO;
 using Gatherer.Infrastructure.Extensions;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Gatherer.Infrastructure.Services
 {
@@ -33,6 +34,13 @@ namespace Gatherer.Infrastructure.Services
         {
             var user = await _userRepository.GetOrFailAsync(email);
             return _mapper.Map<AccountDto>(user);
+        }
+
+        public async Task<IEnumerable<AccountDto>> BrowseAsync()
+        {
+            var users = await _userRepository.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<User>,IEnumerable<AccountDto>>(users);
         }
 
         public async Task RegisterAsync(Guid userId, string email, string name, string password, string role = "user")

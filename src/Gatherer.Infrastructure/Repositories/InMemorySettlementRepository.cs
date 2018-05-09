@@ -7,7 +7,7 @@ using Gatherer.Core.Repositories;
 
 namespace Gatherer.Infrastructure.Repositories
 {
-    public class SettlementRepository : ISettlementRepository
+    public class InMemorySettlementRepository : ISettlementRepository
     {
         private static readonly List<Settlement> _settlements = new List<Settlement>();
 

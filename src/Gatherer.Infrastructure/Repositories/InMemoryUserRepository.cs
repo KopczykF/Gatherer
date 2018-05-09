@@ -7,7 +7,7 @@ using Gatherer.Core.Repositories;
 
 namespace Gatherer.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class InMemoryUserRepository : IUserRepository
     {
         private static readonly ISet<User> _users = new HashSet<User>();
 
@@ -16,6 +16,9 @@ namespace Gatherer.Infrastructure.Repositories
 
         public async Task<User> GetAsync(string email)
             => await Task.FromResult(_users.SingleOrDefault(x=> x.Email.ToLowerInvariant() ==email.ToLowerInvariant()));
+
+        public async Task<IEnumerable<User>> GetAllAsync()
+            => await Task.FromResult(_users);
 
         public async Task AddAsync(User user)
         {
@@ -30,8 +33,6 @@ namespace Gatherer.Infrastructure.Repositories
         }
 
         public async Task UpdateAsync(User user)
-        {
-            await Task.CompletedTask;
-        }
+            => await Task.CompletedTask;
     }
 }

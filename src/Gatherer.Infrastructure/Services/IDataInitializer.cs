@@ -4,6 +4,6 @@ namespace Gatherer.Infrastructure.Services
 {
     public interface IDataInitializer
     {
-         Task SeedAsync();
+        Task SeedAsync();
     }
 }

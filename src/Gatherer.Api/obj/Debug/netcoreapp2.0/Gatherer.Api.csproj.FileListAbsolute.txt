@@ -40,3 +40,4 @@ Z:\Projects\Gatherer\src\Gatherer.Api\obj\Debug\netcoreapp2.0\Gatherer.Api.Assem
 Z:\Projects\Gatherer\src\Gatherer.Api\obj\Debug\netcoreapp2.0\Gatherer.Api.AssemblyInfo.cs
 Z:\Projects\Gatherer\src\Gatherer.Api\obj\Debug\netcoreapp2.0\Gatherer.Api.dll
 Z:\Projects\Gatherer\src\Gatherer.Api\obj\Debug\netcoreapp2.0\Gatherer.Api.pdb
+Z:\Projects\Gatherer\src\Gatherer.Api\obj\Debug\netcoreapp2.0\Gatherer.Api.csprojResolveAssemblyReference.cache

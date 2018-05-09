@@ -10,6 +10,7 @@ using Gatherer.Core.Repositories;
 using Gatherer.Infrastructure.IoC;
 using Gatherer.Infrastructure.IoC.Modules;
 using Gatherer.Infrastructure.Mappers;
+using Gatherer.Infrastructure.Mongo;
 using Gatherer.Infrastructure.Repositories;
 using Gatherer.Infrastructure.Services;
 using Gatherer.Infrastructure.Settings;
@@ -87,6 +88,8 @@ namespace Gatherer.Api
 
             SeedData(app);
             app.UseErrorHandler();
+
+            MongoConfigurator.Initialize();
 
             app.UseAuthentication();
             app.UseMvc();

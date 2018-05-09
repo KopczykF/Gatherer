@@ -14,7 +14,7 @@ namespace Gatherer.Tests.Repositories
         {
             //Arrange
             var user = new User(Guid.NewGuid(), "user", "test", "test@email.com", "secret", "salt");
-            IUserRepository repository = new UserRepository();
+            IUserRepository repository = new InMemoryUserRepository();
             //Act
             await repository.AddAsync(user);
             //Assert

@@ -9160,11 +9160,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\Projects\\Gatherer\\tests\\Gatherer.Tests\\Gatherer.Tests.csproj",
+      "projectUniqueName": "z:\\Projects\\Gatherer\\tests\\Gatherer.Tests\\Gatherer.Tests.csproj",
       "projectName": "Gatherer.Tests",
-      "projectPath": "Z:\\Projects\\Gatherer\\tests\\Gatherer.Tests\\Gatherer.Tests.csproj",
+      "projectPath": "z:\\Projects\\Gatherer\\tests\\Gatherer.Tests\\Gatherer.Tests.csproj",
       "packagesPath": "C:\\Users\\kopcz\\.nuget\\packages\\",
-      "outputPath": "Z:\\Projects\\Gatherer\\tests\\Gatherer.Tests\\obj\\",
+      "outputPath": "z:\\Projects\\Gatherer\\tests\\Gatherer.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -9183,11 +9183,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "Z:\\Projects\\Gatherer\\src\\Gatherer.Core\\Gatherer.Core.csproj": {
-              "projectPath": "Z:\\Projects\\Gatherer\\src\\Gatherer.Core\\Gatherer.Core.csproj"
+            "z:\\Projects\\Gatherer\\src\\Gatherer.Core\\Gatherer.Core.csproj": {
+              "projectPath": "z:\\Projects\\Gatherer\\src\\Gatherer.Core\\Gatherer.Core.csproj"
             },
-            "Z:\\Projects\\Gatherer\\src\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj": {
-              "projectPath": "Z:\\Projects\\Gatherer\\src\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj"
+            "z:\\Projects\\Gatherer\\src\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj": {
+              "projectPath": "z:\\Projects\\Gatherer\\src\\Gatherer.Infrastructure\\Gatherer.Infrastructure.csproj"
             }
           }
         }

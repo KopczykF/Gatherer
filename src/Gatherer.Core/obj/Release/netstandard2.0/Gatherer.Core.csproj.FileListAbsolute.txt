@@ -1,0 +1,9 @@
+Z:\Projects\Gatherer\src\Gatherer.Core\bin\Release\netstandard2.0\Gatherer.Core.deps.json
+Z:\Projects\Gatherer\src\Gatherer.Core\bin\Release\netstandard2.0\Gatherer.Core.dll
+Z:\Projects\Gatherer\src\Gatherer.Core\bin\Release\netstandard2.0\Gatherer.Core.pdb
+Z:\Projects\Gatherer\src\Gatherer.Core\obj\Release\netstandard2.0\Gatherer.Core.csprojResolveAssemblyReference.cache
+Z:\Projects\Gatherer\src\Gatherer.Core\obj\Release\netstandard2.0\Gatherer.Core.csproj.CoreCompileInputs.cache
+Z:\Projects\Gatherer\src\Gatherer.Core\obj\Release\netstandard2.0\Gatherer.Core.AssemblyInfoInputs.cache
+Z:\Projects\Gatherer\src\Gatherer.Core\obj\Release\netstandard2.0\Gatherer.Core.AssemblyInfo.cs
+Z:\Projects\Gatherer\src\Gatherer.Core\obj\Release\netstandard2.0\Gatherer.Core.dll
+Z:\Projects\Gatherer\src\Gatherer.Core\obj\Release\netstandard2.0\Gatherer.Core.pdb
