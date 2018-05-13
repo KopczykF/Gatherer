@@ -79,7 +79,7 @@ namespace Gatherer.Core.Domain
         {
             if (string.IsNullOrWhiteSpace(role))
             {
-                throw new Exception("Role can not be empty.");
+                role = "user";
             }
             if (!_roles.Contains(role))
             {

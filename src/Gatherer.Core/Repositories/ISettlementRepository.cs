@@ -12,7 +12,7 @@ namespace Gatherer.Core.Repositories
         Task AddAsync(Settlement settlement);
         Task AddExpenseAsync(Expense expense, Guid settlementId);
         Task UpdateSettlementAsync(Settlement settlement);
-        Task UpdateExpenseAsync(Expense expense);
+        Task UpdateExpenseAsync(Guid settlementId, Expense expense);
         Task DeleteSettlementAsync(Settlement settlement);
         Task DeleteExpenseAsync(Guid settlementId, Expense expense);
     }

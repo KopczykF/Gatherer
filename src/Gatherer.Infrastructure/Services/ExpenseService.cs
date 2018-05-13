@@ -60,7 +60,7 @@ namespace Gatherer.Infrastructure.Services
             expense.SetCost(cost);
             manager.Settle(await _settlementRepository.GetAsync(settlementId));
 
-            await _settlementRepository.UpdateExpenseAsync(expense);
+            await _settlementRepository.UpdateExpenseAsync(settlementId, expense);
         }
 
         public async Task DeleteAsync(Guid settlementId, Guid userId, Guid expenseId)

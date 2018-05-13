@@ -34,7 +34,7 @@ namespace Gatherer.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task UpdateExpenseAsync(Expense expense)
+        public async Task UpdateExpenseAsync(Guid settlementId, Expense expense)
         {
             await Task.CompletedTask;
         }

@@ -36,7 +36,6 @@ namespace Gatherer.Infrastructure.Repositories
             => await Users.ReplaceOneAsync(x => x.Id == user.Id, user);
 
         
-
         private IMongoCollection<User> Users => _database.GetCollection<User>("Users");
     }
 }

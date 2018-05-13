@@ -98,6 +98,20 @@ namespace Gatherer.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
+        public void UpdateExpense(Expense expense)
+        {
+            if (!_usersExpenseList.ContainsKey(expense.UserId))
+            {
+                throw new Exception($"User with Id: {expense.Id} have not expenses in this settlement");
+            }
+            if (!_usersExpenseList[expense.UserId].Contains(expense))
+            {
+                throw new Exception($"Expense with id: '{expense.Id}' do not exist.");
+            }
+            var expenseIndex = _usersExpenseList[expense.UserId].FindIndex(x => x.Id == expense.Id);
+            _usersExpenseList[expense.UserId][expenseIndex] = expense;
+        }
+
         public IEnumerable<Expense> GetExpenses(Guid userId)
         {
             if (!_usersExpenseList.ContainsKey(userId))
